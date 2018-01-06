@@ -1,0 +1,5 @@
+<? 
+
+include 'bin/config.php';
+
+?>
