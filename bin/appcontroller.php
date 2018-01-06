@@ -7,7 +7,7 @@ class AppController {
     $this->urlPathParts = $urlPathParts;
 
     if ($urlPathParts[0]) {
-      include '../controllers/'.$urlPathParts[0].'.php';
+      include 'controllers/'.$urlPathParts[0].'.php';
       $appcon = new $urlPathParts[0]($this);
 
       if (isset($urlPathParts[1])) {

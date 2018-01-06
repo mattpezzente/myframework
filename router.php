@@ -13,6 +13,9 @@ class Router {
       case 'api':
         $this->App->startApp($urlPathParts);
         break;
+      case 'helloworld':
+        $this->App->startApp($urlPathParts);
+        break;
       default:
         $this->App->startApp($urlPathParts);
         break;
