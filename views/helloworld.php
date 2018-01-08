@@ -1,8 +1,5 @@
-<?
-
-foreach ($data as $key => $value) {
-  echo '<p style="color:'.$value.'">'.$key.'</p>';
-  echo "\r\n";
-}
-
-?>
+<section>
+  <div class="wrapper">
+    <h1>Hello World!</h1>
+  </div>
+</section>

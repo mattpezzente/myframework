@@ -1,3 +1,7 @@
-<footer>
-  <p>Hello, I am the footer</p>
-</footer>
+    <footer>
+      <div class="wrapper">
+        <h2>SSL Project By: Matthew Pezzente</h2>
+      </div>
+    </footer>
+  </body>
+</html>

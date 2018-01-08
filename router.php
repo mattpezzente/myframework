@@ -14,10 +14,10 @@ class Router {
         $this->App->startApp($urlPathParts);
         break;
       case 'helloworld':
-        $this->App->startApp($urlPathParts);
+        $this->App->startApp(array('navigation','buildNav',1));
         break;
       default:
-        $this->App->startApp($urlPathParts);
+        $this->App->startApp(array('navigation','buildNav',0));
         break;
     }
   }
