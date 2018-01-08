@@ -13,6 +13,7 @@ class navigation extends AppController {
     );
     $this->getView('header');
     $this->getView('navigation', $menuItems);
+    $this->getView('masthead');
     $this->getView('footer');
   }
 
@@ -24,6 +25,7 @@ class navigation extends AppController {
     );
     $this->getView('header');
     $this->getView('navigation', $menuItems);
+    $this->getView('masthead');
     $this->getView('footer');
   }
 }
