@@ -11,12 +11,7 @@ class AppController {
       $appcon = new $urlPathParts[0]($this);
 
       if (isset($urlPathParts[1])) {
-        if (isset($urlPathParts[2])) {
-          $appcon->$urlPathParts[1]($urlPathParts[2]);
-        }
-        else {
-          $appcon->$urlPathParts[1]();
-        }
+        $appcon->$urlPathParts[1]();
       }
     }
     else {

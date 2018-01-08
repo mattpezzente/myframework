@@ -1,4 +1,4 @@
-<?
+<?php
 
 include 'bin/app.php';
 
@@ -14,11 +14,13 @@ class Router {
         $this->App->startApp($urlPathParts);
         break;
       case 'helloworld':
-        $this->App->startApp(array('navigation','buildNav',1));
+        $this->App->startApp($urlPathParts);
         break;
       default:
-        $this->App->startApp(array('navigation','buildNav',0));
+        $this->App->startApp($urlPathParts);
         break;
     }
   }
 }
+
+?>

@@ -1,19 +1,22 @@
 <header>
   <div class="wrapper">
     <?
-      $i = 0;
-      foreach ($data as $key => $value) {
-        if ($key == 'currentpage') {
-          //Do Nothing
-        }
-        else if ($i == $data['currentpage']) {
-          echo '<a class="current-page" href='.$value.'>'.$key.'</a>';
+    $keys = array_keys($data);
+      for ($i=0; $i < count($data)-1; $i++) {
+        if ($i == @$data['pageId']) {
+          echo '<a class="current-page" href="'.$data[$keys[$i]].'">'.$keys[$i].'</a>';
         }
         else {
-          echo "<a href=".$value.">".$key."</a>";
-        }
-        $i++;
+          echo "<a href=".$data[$keys[$i]].">".$keys[$i]."</a>";
+        } 
       }
     ?>
   </div>
 </header>
+<?php 
+  if ($data['pageId']==1) {
+    include 'helloworld.php';
+  }
+  else {
+    include 'welcome.php';
+  }

@@ -5,26 +5,27 @@ class navigation extends AppController {
 
   }
 
-  public function buildNav($id) {
+  public function index() {
     $menuItems = array(
-      'Home' => '/',
-      'HelloWorld' => '/helloworld',
-      'currentpage' => $id
+      'Home' => '/navigation/index',
+      'HelloWorld' => '/navigation/helloworld',
+      'pageId' => 0
     );
     $this->getView('header');
     $this->getView('navigation', $menuItems);
-    switch ($id) {
-      case 1:
-        $this->getView('helloworld');
-        break;
-      
-      default:
-        $this->getView('welcome');
-        break;
-    }
+    $this->getView('footer');
+  }
+
+  public function helloworld() {
+    $menuItems = array(
+      'Home' => '/navigation/index',
+      'HelloWorld' => '/navigation/helloworld',
+      'pageId' => 1
+    );
+    $this->getView('header');
+    $this->getView('navigation', $menuItems);
     $this->getView('footer');
   }
 }
-
 
 ?>
