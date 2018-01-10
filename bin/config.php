@@ -1,7 +1,7 @@
 <?php
 
 $config = array(
-  'defaultController' => 'navigation',
+  'defaultController' => 'home',
   'dbname' => 'fruits',
   'dbpass' => 'root',
   'dbuser' => 'root',
