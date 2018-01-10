@@ -5,6 +5,6 @@
 </section>
 
 <?php
-  include 'components/progress.php';
-  include 'components/popover.php';
+  include 'views/components/progress.php';
+  include 'views/components/popover.php';
 ?>

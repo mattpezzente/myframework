@@ -4,12 +4,15 @@ include_once('navigation.php');
 
 class api extends AppController {
   public function __construct() {      
-    $this->getView('header');
     $this->navigation = new navigation();
+  }
+
+  public function index() {
+    $this->getView('sections/header');
     $this->navigation->buildNav('api');
-    $this->getView('masthead');
-    $this->getView('api');
-    $this->getView('footer');
+    $this->getView('sections/masthead');
+    $this->getView('pages/api');
+    $this->getView('sections/footer');
   }
 }
 

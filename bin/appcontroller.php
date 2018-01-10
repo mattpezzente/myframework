@@ -13,6 +13,12 @@ class AppController {
       if (isset($urlPathParts[1])) {
         $appcon->$urlPathParts[1]();
       }
+      else {
+        $methodVariable = array($appcon,'index');
+        if (is_callable($methodVariable,false,$callable_name)) {
+          @$appcon->index();
+        }
+      }
     }
     else {
       include 'controllers/'.$config['defaultController'].'.php';
@@ -20,6 +26,12 @@ class AppController {
 
       if (isset($urlPathParts[1])) {
         $appcon->config['defaultController'].'.php';
+      }
+      else {
+        $methodVariable = array($appcon,'index');
+        if (is_callable($methodVariable,false,$callable_name)) {
+          @$appcon->index();
+        }
       }
     }
   }

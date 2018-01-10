@@ -6,6 +6,7 @@ class navigation extends AppController {
       'Home' => '/home',
       'Crud' => '/crud',
       'API' => '/api',
+      'Contact' => '/contact',
       'currentpage' => 'home'
     );
   }
@@ -14,7 +15,7 @@ class navigation extends AppController {
     foreach ($this->menu as $lbl => $link) {
       if (strtolower($page) == strtolower($lbl)) {
         $this->menu['currentpage'] = strtolower($lbl);
-        $this->getView('navigation', $this->menu);
+        $this->getView('sections/navigation', $this->menu);
       }
     }
   }

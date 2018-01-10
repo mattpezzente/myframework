@@ -2,16 +2,16 @@
 
 include_once('navigation.php');
 
-class home extends AppController {
+class contact extends AppController {
   public function __construct() {      
     $this->navigation = new navigation();
   }
 
   public function index() {
     $this->getView('sections/header');
-    $this->navigation->buildNav('home');
+    $this->navigation->buildNav('contact');
     $this->getView('sections/masthead');
-    $this->getView('pages/home');
+    $this->getView('pages/contact');
     $this->getView('sections/footer');
   }
 }

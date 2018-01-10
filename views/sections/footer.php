@@ -14,8 +14,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
     <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover(); 
+    });
+    </script>
   
-
     <!-- Custom scripts for this template -->
     <script src="/assets/js/clean-blog.min.js"></script>
   </body>
