@@ -17,7 +17,30 @@
     <script>
     $(document).ready(function(){
         $('[data-toggle="popover"]').popover(); 
-    });
+    });  
+    </script>
+    <script>
+      $('#sendMessageButtonAJAX').click(function() {
+        let username = document.querySelector('input[name="username"]').value
+        let password = document.querySelector('input[name="password"]').value
+        let message = document.querySelector('#message').value
+        console.log('work1');
+        $.ajax({
+          method: 'POST',
+          url: '/contact/ajaxValidation', 
+          data: {
+            username: username,
+            password: password,
+            message: message,
+            gender: 'gender',
+            newsletter: 'newsletter',
+            age: 'age'
+          },
+          success: function(msg) {
+            if (msg=='yes'){alert('yes')}else{alert('no')}
+          }
+        });
+      });
     </script>
   
     <!-- Custom scripts for this template -->

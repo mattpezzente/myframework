@@ -1,5 +1,5 @@
 <section>
-  <h1>Submission Form</h1>
+  <h1>Contact</h1>
 </section>
 
 <?php
