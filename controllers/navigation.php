@@ -1,14 +1,26 @@
 <?php
 
 class navigation extends AppController {
-  public function __construct() {      
-    $this->menu = array(
-      'Home' => '/home',
-      'Crud' => '/crud',
-      'API' => '/api',
-      'Log In' => '/login',
-      'currentpage' => ''
-    );
+  public function __construct() {
+    if(@$_SESSION["loggedin"]==1) {
+      $this->menu = array(
+        'Home' => '/home',
+        'Crud' => '/crud',
+        'API' => '/api',
+        'Profile' => '/profile',
+        'Log Out' => '/logout',        
+        'currentpage' => ''
+      );
+    }
+    else { 
+      $this->menu = array(
+        'Home' => '/home',
+        'Crud' => '/crud',
+        'API' => '/api',        
+        'Log In' => '/login',
+        'currentpage' => ''
+      );
+    }
   }
 
   public function buildNav($page) {

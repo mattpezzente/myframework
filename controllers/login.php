@@ -5,21 +5,27 @@ include_once('navigation.php');
 class login extends AppController {
   public function __construct() {      
     $this->navigation = new navigation();
-    $this->user = array(
+    $this->user = [
       'username' => 'Johnathan',
       'password' => 'John4321'
-    );
+    ];
   }
 
   public function index() {
-    $this->getView('sections/header');
-    $this->navigation->buildNav('login');
-    $this->getView('components/login');
-    $this->getView('sections/footer');
+    if (@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
+      header('location:/home');
+    }
+    else {    
+      $this->getView('sections/header');
+      $this->navigation->buildNav('login');
+      $this->getView('components/login', array('cap' => $this->randomCaptcha()));
+      $this->getView('sections/footer');
+    }
   }
 
   public function userAuth() {
-    $authResults = @$this->validateAuth($_REQUEST);
+    $authResults = @$this->validateAuth();
+    $authResults['cap'] = $this->randomCaptcha();
     $this->getView('sections/header');
     $this->navigation->buildNav('login');
     if (@$_REQUEST && @$authResults) {
@@ -41,21 +47,29 @@ class login extends AppController {
   //   }
   // }
 
-  public function validateAuth($request) {
+  public function validateAuth() {
     $errors = array(
-      'username' => 'error, invalid username.',
-      'password' => 'error, invalid password.',
+      'captcha' => '',
+      'username' => '',
+      'password' => '',
     );
-    
-    $errors['username'] = $this->validateUser();
-    $errors['password'] = $this->validatePassword();
 
-    if ($errors['username'] == '' && $errors['password'] == '') {
-      return array(
-        'success' => 'Login Successful!'
-      );
+    if (strtolower($_REQUEST['cap']) == strtolower($_SESSION['cap'])) {
+      $errors['username'] = $this->validateUser();
+      if ($errors['username'] == '') {
+        $errors['password'] = $this->validatePassword();
+      }
+
+      if ($errors['username'] == '' && $errors['password'] == '') {
+        $_SESSION['loggedin']=1;
+        header("location:/profile");
+      }
+      else {
+        return $errors;
+      }
     }
     else {
+      $errors['captcha'] = 'Error, captcha incorrect.';
       return $errors;
     }
   }
@@ -82,6 +96,10 @@ class login extends AppController {
     else {
       return '';
     }
+  }
+
+  public function randomCaptcha() {
+    return substr(md5(rand()), 0, 7);
   }
 }
 

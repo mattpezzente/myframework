@@ -8,6 +8,31 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <h2>Register</h2>
+        <?php
+          function create_image($cap) {
+            unlink("assets/image1.png");
+            global $image;
+            $image = imagecreatetruecolor(200, 50) or die("Cannot Initialize new GD image stream");
+            $background_color = imagecolorallocate($image, 255, 255, 255);
+            $text_color = imagecolorallocate($image, 0, 255, 255);
+            $line_color = imagecolorallocate($image, 64, 64, 64);
+            $pixel_color = imagecolorallocate($image, 0, 0, 255);
+            
+            imagefilledrectangle($image, 0, 0, 200, 50, $background_color);
+            
+            for ($i = 0; $i < 3; $i++) {
+               imageline($image, 0, rand() % 50, 200, rand() % 50, $line_color);
+            }
+
+            for ($i = 0; $i < 1000; $i++) {
+              imagesetpixel($image, rand() % 200, rand() % 50, $pixel_color);
+            }
+           $text_color = imagecolorallocate($image, 0, 0, 0);
+           ImageString($image, 22, 30, 22, $cap, $text_color);
+           $_SESSION['cap'] = $cap;
+           imagepng($image, "assets/image1.png");
+          }          
+        ?>
         <form name="sentMessage" id="contactForm" action="/contact/userAuth" method="POST">
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
@@ -92,6 +117,17 @@
                 ?>         
               </select>
               <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <?php 
+            create_image(@$data['cap']); 
+            echo "<img src='/assets/image1.png'>"; 
+          ?>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label for="exampleInputEmail1">Captcha</label>
+              <input name="cap" type="captcha" id="captcha"  placeholder="*Captcha">
+              <p class="help-block text-danger"><?php echo @$data['captcha'];?></p>
             </div>
           </div>
           <br>
