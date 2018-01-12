@@ -47,14 +47,12 @@ class contact extends AppController {
     $errors = array(
       'username' => 'error, invalid username.',
       'password' => 'error, invalid password.',
-      'message' => 'error, message can only contain numbers, letters and spaces.',
     );
     
     $errors['username'] = $this->validateUser();
     $errors['password'] = $this->validatePassword();
-    $errors['message'] = $this->validateMessage();
 
-    if ($errors['username'] == '' && $errors['password'] == '' && $errors['message'] == '') {
+    if ($errors['username'] == '' && $errors['password'] == '') {
       return array(
         'success' => 'Login Successful!'
       );
@@ -82,18 +80,6 @@ class contact extends AppController {
     }
     else if ($_REQUEST['password'] != $this->user['password'] && $_REQUEST['username'] != $this->user['username']) {
       return 'Error, incorrect password.';
-    }
-    else {
-      return '';
-    }
-  }
-
-  public function validateMessage() {
-    if ($_REQUEST['message'] == '') {
-      return '';
-    }
-    else if (!preg_match('/[A-Za-z0-9_ -]*[A-Za-z0-9_ -]/', $_REQUEST['message'])) {
-      return 'Error, message can only contain letters, numbers, and spaces';
     }
     else {
       return '';

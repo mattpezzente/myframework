@@ -37,7 +37,7 @@
             age: 'age'
           },
           success: function(msg) {
-            if (msg=='yes'){alert('yes')}else{alert('no')}
+            if (msg=='yes'){alert('Success!')}else{alert('Login unsuccessful, please try again.')}
           }
         });
       });

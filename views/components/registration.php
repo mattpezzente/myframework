@@ -64,7 +64,7 @@
             <div class="form-group col-xs-12 floating-label-form-group controls">
               <p>Newsletter</p>
               <?php
-                if (@count($_REQUEST['newsletter']) == 0) {
+                if (@count($_REQUEST) == 0) {
                   echo '<input type="checkbox" checked name="newsletter" class="form-control" id="newsletter">';
                 }
                 else if (!@$_REQUEST['newsletter']) {
