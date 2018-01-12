@@ -10,7 +10,6 @@ class home extends AppController {
   public function index() {
     $this->getView('sections/header');
     $this->navigation->buildNav('home');
-    $this->getView('sections/masthead');
     $this->getView('pages/home');
     $this->getView('sections/footer');
   }

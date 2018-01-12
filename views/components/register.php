@@ -7,7 +7,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <h2>Validation Form</h2>
+        <h2>Register</h2>
         <form name="sentMessage" id="contactForm" action="/contact/userAuth" method="POST">
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
@@ -98,7 +98,7 @@
           <div id="success"></div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
-            <input type="button" class="btn btn-primary ajaxBtn" id="sendMessageButtonAJAX" value="Login With AJAX">
+            <!-- <input type="button" class="btn btn-primary ajaxBtn" id="sendMessageButtonAJAX" value="Login With AJAX"> -->
           </div>
         </form>
       </div>

@@ -10,7 +10,6 @@ class api extends AppController {
   public function index() {
     $this->getView('sections/header');
     $this->navigation->buildNav('api');
-    $this->getView('sections/masthead');
     $this->getView('pages/api');
     $this->getView('sections/footer');
   }

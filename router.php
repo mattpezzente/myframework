@@ -16,7 +16,10 @@ class Router {
       case 'crud':
         $this->App->startApp($urlPathParts);
         break;
-      case 'contact':
+      case 'login':
+        $this->App->startApp($urlPathParts);
+        break;
+      case 'register':
         $this->App->startApp($urlPathParts);
         break;
       default:

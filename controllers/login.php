@@ -2,46 +2,44 @@
 
 include_once('navigation.php');
 
-class contact extends AppController {
+class login extends AppController {
   public function __construct() {      
     $this->navigation = new navigation();
     $this->user = array(
       'username' => 'Johnathan',
       'password' => 'John4321'
-    ); 
+    );
   }
 
   public function index() {
     $this->getView('sections/header');
-    $this->navigation->buildNav('contact');
-    $this->getView('sections/masthead');
-    $this->getView('pages/contact');
+    $this->navigation->buildNav('login');
+    $this->getView('components/login');
     $this->getView('sections/footer');
   }
 
   public function userAuth() {
     $authResults = @$this->validateAuth($_REQUEST);
     $this->getView('sections/header');
-    $this->navigation->buildNav('contact');
-    $this->getView('sections/masthead');
+    $this->navigation->buildNav('login');
     if (@$_REQUEST && @$authResults) {
-      $this->getView('pages/contact', $authResults);
+      $this->getView('components/login', $authResults);
     }
     else {
-      $this->getView('pages/contact', $authResults);
+      $this->getView('components/login', $authResults);
     }
     $this->getView('sections/footer');
   }
 
-  public function ajaxValidation() {
-    $authResults = @$this->validateAuth($_REQUEST);
-    if (@$authResults['success']) {
-      echo 'yes';
-    }
-    else {
-      echo 'no';
-    }
-  }
+  // public function ajaxValidation() {
+  //   $authResults = @$this->validateAuth($_REQUEST);
+  //   if (@$authResults['success']) {
+  //     echo 'yes';
+  //   }
+  //   else {
+  //     echo 'no';
+  //   }
+  // }
 
   public function validateAuth($request) {
     $errors = array(

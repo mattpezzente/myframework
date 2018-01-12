@@ -1,4 +1,3 @@
-<!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container">
     <a class="navbar-brand" href="/home">SSL</a>
@@ -10,13 +9,13 @@
       <ul class="navbar-nav ml-auto">
         <?php
           foreach ($data as $lbl => $link) {
-            if (strtolower($data['currentpage']) == strtolower($lbl)) {
+            if ($lbl == 'currentpage') {
+              // skip
+            }
+            else if (strtolower($data['currentpage']) == strtolower(str_replace('/', '', $link))) {
               echo '<li class="nav-item">';
               echo '<a class="nav-link current-page" href="'.$link.'">'.$lbl.'</a>';
               echo '</li>';
-            }
-            else if ($lbl == 'currentpage') {
-              // skip
             }
             else {
               echo '<li class="nav-item">';
