@@ -2,7 +2,7 @@
 
 class navigation extends AppController {
   public function __construct() {
-    if(@$_SESSION["loggedin"]==1) {
+    if(@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
       $this->menu = array(
         'Home' => '/home',
         'Crud' => '/crud',

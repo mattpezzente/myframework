@@ -32,7 +32,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Username</label>
-              <input type="text" name="username" class="form-control" placeholder="*Johnathan" id="username" required="" data-validation-required-message="Please enter your username." aria-invalid="false" value=<?php  
+              <input type="text" name="username" class="form-control" placeholder="*Username" id="username" required="" data-validation-required-message="Please enter your username." aria-invalid="false" value=<?php  
                 if (@$_REQUEST['username']) {
                   echo $_REQUEST['username'];
                 }
@@ -43,7 +43,7 @@
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Password</label>
-              <input type="password" name="password" class="form-control" placeholder="*John4321" id="password" required data-validation-required-message="Please enter your password.">
+              <input type="password" name="password" class="form-control" placeholder="*Password" id="password" required data-validation-required-message="Please enter your password.">
               <p class="help-block text-danger"><?php echo @$data['password']?></p>
             </div>
           </div>

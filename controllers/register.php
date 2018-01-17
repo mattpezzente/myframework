@@ -5,18 +5,20 @@ include_once('navigation.php');
 class register extends AppController {
   public function __construct() {      
     $this->navigation = new navigation();
+
+    if (@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
+      
+    }
+    else {
+      header('location:/home');
+    }
   }
 
   public function index() {
-    if (@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
-      header('location:/home');
-    }
-    else {
-      $this->getView('sections/header');
-      $this->navigation->buildNav();
-      $this->getView('components/register', array('cap' => $this->randomCaptcha()));
-      $this->getView('sections/footer');
-    }
+    $this->getView('sections/header');
+    $this->navigation->buildNav();
+    $this->getView('components/register', array('cap' => $this->randomCaptcha()));
+    $this->getView('sections/footer');
   }
 
   public function userAuth() {
