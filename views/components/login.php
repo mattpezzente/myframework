@@ -28,7 +28,7 @@
            imagepng($image, "assets/image1.png");
           }          
         ?>
-        <form name="loginForm" id="loginForm" action="/login/userAuth" method="POST">
+        <form name="loginForm" id="loginForm" action="/auth/login" method="POST">
           <div class="control-group">
             <div class="form-group floating-label-form-group controls">
               <label>Username</label>

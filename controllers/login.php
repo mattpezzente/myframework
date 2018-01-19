@@ -10,11 +10,11 @@ class login extends AppController {
       header('location:/home');
     }
     else {
-      $txtFile = fopen($_SERVER['DOCUMENT_ROOT'].'/assets/login.txt', 'r');
-      while(!feof($txtFile)) {
-        array_push($this->user, explode('|', (fgets($txtFile))));
-      }
-      fclose($txtFile);
+      // $txtFile = fopen($_SERVER['DOCUMENT_ROOT'].'/assets/login.txt', 'r');
+      // while(!feof($txtFile)) {
+      //   array_push($this->user, explode('|', (fgets($txtFile))));
+      // }
+      // fclose($txtFile);
     }
   }
 

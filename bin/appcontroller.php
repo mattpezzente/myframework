@@ -3,7 +3,7 @@
 session_start();
 class AppController {
   public function __construct($urlPathParts, $config) {
-    // db information
+
     $this->db = new PDO('mysql:dbname='.$config['dbname'].';',$config['dbuser'],$config['dbpass']);
     $this->urlPathParts = $urlPathParts;
 
@@ -41,11 +41,10 @@ class AppController {
     require_once './views/'.$page.'.php';
   }
 
-  public function getModel() {
-    // add this later
-    // get then pass data to that page(view)
-
-
+  public function getModel($page) {
+    require_once './models/'.$page.'.php';
+    $model = new $page($this);
+    return $model;
   }
 }
 
