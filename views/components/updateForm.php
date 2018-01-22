@@ -8,6 +8,6 @@
         echo "<input type='text' name='name' placeholder='Bananas ?' value='".$data[0]["name"]."'/>";
       ?>
       <input type="submit"/>
-    </form>  
+    </form>
   </div>
 </div>

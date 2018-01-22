@@ -16,14 +16,6 @@ class users {
     $this->sql = $this->db->prepare($sql);
     $results = $this->sql->execute($array);
   }
-
-  public function delete() {
-
-  }
-
-  public function update() {
-
-  }
 }
 
 ?>

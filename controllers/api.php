@@ -13,10 +13,19 @@ class api extends AppController {
     $this->navigation->buildNav('api');
     $this->getView('pages/api');
     if (@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
-      $data = $this->parent->getModel("apiModel")->googleBooks("Henry David Thoreau");      
+      $data = array();
+
+      if (isset($_REQUEST["code"] || isset($_SESSION["accessToken"])) {
+        $data = $this->parent->getModel("apiModel")->googleEmails();
+      }
+
       $this->getView("components/api", $data);
     }
     $this->getView('sections/footer');
+  }
+
+  public function getGoogleEmails() {
+    $data = $this->parent->getModel("apiModel")->getClient();
   }
 }
 
