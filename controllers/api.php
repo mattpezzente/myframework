@@ -15,17 +15,20 @@ class api extends AppController {
     if (@$_SESSION["loggedin"] && @$_SESSION["loggedin"]==1) {
       $data = array();
 
-      if (isset($_REQUEST["code"] || isset($_SESSION["accessToken"])) {
-        $data = $this->parent->getModel("apiModel")->googleEmails();
-      }
-
+      if (isset($_SESSION["access_token"]) && $_SESSION["access_token"]) {        
+        $data = $this->parent->getModel("apiModel")->getEmails();
+      }      
       $this->getView("components/api", $data);
     }
     $this->getView('sections/footer');
   }
 
-  public function getGoogleEmails() {
-    $data = $this->parent->getModel("apiModel")->getClient();
+  public function getClient() {
+    $this->parent->getModel("apiModel")->getClient();
+  }
+
+  public function setAuth() {
+    $this->parent->getModel("apiModel")->setAuth();
   }
 }
 

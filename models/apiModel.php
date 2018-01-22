@@ -7,7 +7,7 @@ define('CLIENT_SECRET_PATH', __DIR__ . '/client_secret.json');
 // If modifying these scopes, delete your previously saved credentials
 // at ~/.credentials/gmail-php-quickstart.json
 define('SCOPES', implode(' ', array(
-  Google_Service_Gmail::GMAIL_READONLY)
+  Google_Service_Gmail::MAIL_GOOGLE_COM)
 ));
 
 class apiModel {
@@ -15,91 +15,79 @@ class apiModel {
     $this->db = $parent->db;
   }
 
-  public function googleEmails() {
+  public function getEmails() {
     // Get the API client and construct the service object.
-    $client = $this->getClient() 
-    $service = new Google_Service_Gmail($client);
-
-
-
-    // if (!isset($_REQUEST["code"])) {
-    //   $this->getClient($client);  
-    // }
-    // // else if (isset($_SESSION["accessToken"])) {
-    // //   # code.
-    // // }
-    // else {
-    //   $client = $this->authClient($client);          
-    //   // Return the messages in the user's account.
-    //   $userId = 'me';
-      
-      
-    //   return $this->listMessages($service, $userId);      
-    // }
-  }
-
-  public function getClient($client) {
     $client = new Google_Client();
     $client->setApplicationName(APPLICATION_NAME);
     $client->setScopes(SCOPES);
     $client->setAuthConfig(CLIENT_SECRET_PATH);
     $client->setAccessType('online');
+    $client->setAccessToken($_SESSION["access_token"]);    
+    $service = new Google_Service_Gmail($client);
+              
+    $messages = $this->listMessages($service);
+    
+    // var_dump($service->users_messages->get('me', $messageIds[0]["id"]));
 
-    if (!isset($_SESSION["accessToken"])) {
-      $authUrl = $client->createAuthUrl();
-      header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL)); 
-      return $client;
-    }
-    else {
-      return $client;
-    } 
+    // $messages = $this->getMessage($service, 'me', $messageIds);
+
+    // var_dump($messages);
+
+    return '';
   }
 
-  public function setAuth($client) {
-    if (isset($_REQUEST["code"])) {
-      $authCode = $_REQUEST["code"];
-      // Exchange authorization code for an access token.
-      $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-    }
-    else {
-      $authCode = $_SESSION["accessToken"];
-
-      // Exchange authorization code for an access token.
-      $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-    }
-
-    // Exchange authorization code for an access token.
-    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-    
-    
-    $client->setAccessToken($accessToken);
-
-    // Refresh the token if it's expired.
-    if ($client->isAccessTokenExpired()) {
-      $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-    }
-    return $client;
+  public function getClient() {
+    $client = new Google_Client();
+    $client->setApplicationName(APPLICATION_NAME);
+    $client->setScopes(SCOPES);
+    $client->setAuthConfig(CLIENT_SECRET_PATH);
+    $client->setAccessType('online');
+    $authUrl = $client->createAuthUrl();
+    header('Location: ' . filter_var($authUrl, FILTER_SANITIZE_URL)); 
   }
 
-  function listMessages($service, $userId) {    
-    $pageToken = NULL;
-    $messages = array();
-    $opt_param = array();
-    do {
-      if ($pageToken) {
-        $opt_param['pageToken'] = $pageToken;
-        $opt_param['maxResults'] = 100;
-      }
-      $messagesResponse = $service->users_messages->listUsersMessages($userId, $opt_param);      
-      if ($messagesResponse->getMessages()) {
-        $messages = array_merge($messages, $messagesResponse->getMessages());
-        var_dump($messagesResponse->getMessages());
-        $pageToken = $messagesResponse->getNextPageToken();
-      }
-    } while ($pageToken && $messages < 100);
-    
-    return $messages;
+  public function setAuth() {
+    $client = new Google_Client();
+    $client->setApplicationName(APPLICATION_NAME);
+    $client->setScopes(SCOPES);
+    $client->setAuthConfig(CLIENT_SECRET_PATH);
+    $client->setAccessType('online');         
+    $client->authenticate($_REQUEST["code"]);
+    $_SESSION["access_token"] = $client->getAccessToken();
+    header('location:/api');
   }
+
+  function listMessages($service, $userId="me") {
+    // $messages = array();
+    $data = {
+      header: '',
+      body: '',
+      date: '',
+    }
+    // do {
+      $msgResponse = $service->users_messages->listUsersMessages($userId);
+      $data["body"] = base64_decode($service->users_messages->get('me', $msgResponse[0]["id"], array("format" => "full"))["payload"]["parts"][0]["body"]["data"]));
+      $data["body"];
+
+      var_dump($data);
+    // } while ($messages < 100);
+    
+    return '';
+  }
+
+  // function getMessage($service, $userId, $messageIds) {
+  //   $messages = array();
+  //   foreach ($messageIds as $messageId) {            
+  //     do {
+        
+  //       $messagesResponse = $service->users_messages->get($userId, $messageId["id"]);              
+        
+  //       $messages = array_merge($messages, $messagesResponse);  
+
+  //     } while ($messages < 100);
+  //   }
+  //   return $messages;
+  // }
 }
 
 ?>
