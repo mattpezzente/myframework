@@ -12,7 +12,6 @@ class home extends AppController {
     $this->navigation->buildNav('home');
     $this->getView('pages/home');
     $this->getView('sections/footer');
-    unset($_SESSION["access_token"]);
   }
 }
 

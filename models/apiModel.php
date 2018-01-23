@@ -25,15 +25,9 @@ class apiModel {
     $client->setAccessToken($_SESSION["access_token"]);    
     $service = new Google_Service_Gmail($client);
               
-    $messages = $this->listMessages($service);
+    $messageData = $this->listMessages($service);
     
-    // var_dump($service->users_messages->get('me', $messageIds[0]["id"]));
-
-    // $messages = $this->getMessage($service, 'me', $messageIds);
-
-    // var_dump($messages);
-
-    return '';
+    return $messageData;
   }
 
   public function getClient() {
@@ -58,36 +52,43 @@ class apiModel {
   }
 
   function listMessages($service, $userId="me") {
-    // $messages = array();
-    $data = {
-      header: '',
-      body: '',
-      date: '',
-    }
-    // do {
-      $msgResponse = $service->users_messages->listUsersMessages($userId);
-      $data["body"] = base64_decode($service->users_messages->get('me', $msgResponse[0]["id"], array("format" => "full"))["payload"]["parts"][0]["body"]["data"]));
-      $data["body"];
+    $messageData = array();
+    $msgResponse = $service->users_messages->listUsersMessages($userId);
 
-      var_dump($data);
-    // } while ($messages < 100);
-    
-    return '';
+    for ($i=0; $i < 10; $i++) {  
+      $data = array(
+        'subject' => '',
+        'body' => '',
+        'date' => '',
+      );   
+      $email = $service->users_messages->get($userId, $msgResponse[$i]["id"], array("format" => "full"));            
+      $header = $email["payload"]["headers"];
+      $subjectIndex = 0;
+      for ($j=0; $j < count($header); $j++) { 
+        foreach ($header[$j] as $key => $value) {
+          if ($value === "Subject") {
+            $subjectIndex = $j;
+          }
+        }
+      }
+      $data["subject"] = $header[$subjectIndex]["value"];
+      $date = $email["payload"]["headers"];
+      $subjectIndex = 0;
+      for ($j=0; $j < count($header); $j++) { 
+        foreach ($header[$j] as $key => $value) {
+          if ($value === "Date") {
+            $subjectIndex = $j;
+          }
+        }
+      }
+      $data["date"] = $header[$subjectIndex]["value"];      
+      $data["body"] = $email["snippet"];
+          
+      array_push($messageData, $data);
+    }        
+
+    return $messageData;
   }
-
-  // function getMessage($service, $userId, $messageIds) {
-  //   $messages = array();
-  //   foreach ($messageIds as $messageId) {            
-  //     do {
-        
-  //       $messagesResponse = $service->users_messages->get($userId, $messageId["id"]);              
-        
-  //       $messages = array_merge($messages, $messagesResponse);  
-
-  //     } while ($messages < 100);
-  //   }
-  //   return $messages;
-  // }
 }
 
 ?>
