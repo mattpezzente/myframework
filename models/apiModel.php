@@ -4,8 +4,6 @@ require_once "vendor/autoload.php";
 
 define('APPLICATION_NAME', 'SSL_Web_App');
 define('CLIENT_SECRET_PATH', __DIR__ . '/client_secret.json');
-// If modifying these scopes, delete your previously saved credentials
-// at ~/.credentials/gmail-php-quickstart.json
 define('SCOPES', implode(' ', array(
   Google_Service_Gmail::MAIL_GOOGLE_COM)
 ));
@@ -16,7 +14,7 @@ class apiModel {
   }
 
   public function getEmails() {
-    // Get the API client and construct the service object.
+    
     $client = new Google_Client();
     $client->setApplicationName(APPLICATION_NAME);
     $client->setScopes(SCOPES);

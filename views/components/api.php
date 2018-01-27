@@ -1,5 +1,5 @@
 <style type="text/css">
-  table.blueTable {
+table.blueTable {
   border: 1px solid #1C6EA4;
   background-color: #EEEEEE;
   width: 100%;
